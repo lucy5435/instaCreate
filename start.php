@@ -12,9 +12,9 @@ echo "Kardeşim Kullanıyorsun Bir Teşekkürü Eksik Etmezsin :)\n";
 echo " -----------------------------\n";
 
 echo "Kaç adet hesap istiyorsunuz [Fazla Yapmak Sunucuzu Yorar][?]:";
-$count = trim(fgets(STDIN, 1024));
+$count = 1;
 echo "Kaç saniyede bir üretilsin [10 yapmanız önerilir] [?]:";
-$sleep = trim(fgets(STDIN, 1024));
+$sleep = 10;
 echo "[!] Hesaplar oluşuyor. . .\n\n";
 $i = new instaCreator();
 $i->userCreate($count,$sleep);
