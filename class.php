@@ -4,7 +4,7 @@ class instaCreator {
 protected $trProxy = "88.255.182.170"; // TR olması zorunludur.
 protected $trProxy_Port = "8080";
 protected $trProxy_Tur = "HTTPS";
-	protected $csrf_token = '8T1YSTEUhZm0D13VLpqncYF0eaHxwfmf'; 
+	protected $csrf_token = '8T1YSTEUhZm0D13VLpqncYF0eaHxwfmf';
 	protected $mid_token = 'XMby6wABAAHpx_WQyBTy4tSCj7Bl';
 
 	private function connectInstagram($username, $password, $email, $full_name, $proxy){
@@ -15,10 +15,10 @@ protected $trProxy_Tur = "HTTPS";
 		curl_setopt($channel, CURLOPT_POSTFIELDS, "email=".$email."&password=".$password."&username=".$username."&first_name=".$full_name."&seamless_login_enabled=1&tos_version=row");
 		curl_setopt($channel, CURLOPT_POST, 1);
 		curl_setopt($channel, CURLOPT_ENCODING, 'gzip, deflate');
-		if($proxy){
+		/*if($proxy){
 			curl_setopt($channel, CURLOPT_PROXY, $proxy);
 			curl_setopt($channel, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS4);
-		}
+		}*/
 
 		$headers = array();
 		$headers[] = "Host: www.instagram.com";
@@ -64,15 +64,15 @@ public function bio($username, $id){
 		$headers[] = "Referer: https://www.instagram.com/accounts/login";
 		$headers[] = "Accept-Language: tr-TR,en-US,en;q=0.8,id;q=0.6";
 
-		curl_setopt($channel1, CURLOPT_HTTPHEADER, $headers); 
+		curl_setopt($channel1, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($channel1, CURLOPT_PROXYPORT, $this->trProxy_Port);
 curl_setopt($channel1, CURLOPT_PROXYTYPE, $this->trProxy_Tur); // HTTP/HTTPS türü proxy kullanacağız.
 curl_setopt($channel1, CURLOPT_PROXY, $this->trProxy);
 		$result = curl_exec($channel1);
 		curl_close($channel1);
 		}
-		
-	
+
+
 	private function getUser(){
 		$channel = curl_init();
 		curl_setopt($channel, CURLOPT_URL,"http://api.randomuser.me/?nat=tr");
@@ -134,7 +134,7 @@ echo "[!] $i Hesap oluşturuluyor!..\n";
 								$userCreate = json_decode($userCreate);
 				if($userCreate->account_created == "true"){
 fwrite(fopen($randomUser_Save_Docs,"a+") ,"$randomUser_User_Name:$randomUser_Password \n");
-					
+
 						$kadi = json_decode(file_get_contents('http://insta-node.herokuapp.com/_validate_username?username='.$randomUser_User_Name.''), true)['valid'];
 					if($kadi == false){
 							echo "[!] ".$i.". Açılan hesap: ".$randomUser_User_Name.":".$randomUser_Password."\n";
@@ -142,14 +142,14 @@ fwrite(fopen($randomUser_Save_Docs,"a+") ,"$randomUser_User_Name:$randomUser_Pas
 $this->bio($randomUser_User_Name, $randomUser_id);
 echo "[•] Takip Başarılı\n";
 																	}
-						
+
 				}else{
 					echo "[!] ".$i.". Açılamıyan hesap: ".$randomUser_User_Name.":".$randomUser_Password."\n";
 					print_r($userCreate);
 				}
 				sleep($sleep);
 			}
-			
+
 		}while($count == 'false');
 	}
 }
