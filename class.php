@@ -7,7 +7,7 @@ protected $trProxy_Tur = "HTTPS";
 	protected $csrf_token = 'IdetTiYe6zzc13uzMJFy6qrYyRsUsjNp';
 	protected $mid_token = 'XLm-XgALAAGf0dFqO7BAbdd3NH_U';
 
-	private function connectInstagram($username, $password, $email, $full_name, $proxy){
+	private function connectInstagram($username, $password, $email, $full_name){
 
 		$channel = curl_init();
 		curl_setopt($channel, CURLOPT_URL, "https://www.instagram.com/accounts/web_create_ajax/");
@@ -15,10 +15,6 @@ protected $trProxy_Tur = "HTTPS";
 		curl_setopt($channel, CURLOPT_POSTFIELDS, "email=".$email."&password=".$password."&username=".$username."&first_name=".$full_name."&seamless_login_enabled=1&tos_version=row");
 		curl_setopt($channel, CURLOPT_POST, 1);
 		curl_setopt($channel, CURLOPT_ENCODING, 'gzip, deflate');
-		/*if($proxy){
-			curl_setopt($channel, CURLOPT_PROXY, $proxy);
-			curl_setopt($channel, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS4);
-		}*/
 
 		$headers = array();
 		$headers[] = "Host: www.instagram.com";
@@ -104,14 +100,7 @@ curl_setopt($channel1, CURLOPT_PROXY, $this->trProxy);*/
         return $randomString;
 	}
 
-    private function getProxy(){
-        $proxyFile = @fopen('proxylist.txt', 'r');
-        if($proxyFile){
-            $getProxies = explode(PHP_EOL, fread($proxyFile, filesize('proxylist.txt')));
-        }
-        $getRandom = (count($getProxies) > 0) ? $getProxies[rand(0, (count($getProxies) - 1))] : NULL;
-        return $getRandom;
-    }
+
 
 	public function userCreate($count = 1, $sleep = 10){
 		do {
@@ -126,13 +115,12 @@ curl_setopt($channel1, CURLOPT_PROXY, $this->trProxy);*/
 				$randomUser_Email_Adress = "{$randomUser_User_Name}@".$randomUser_Email_Domain[mt_rand(0, count($randomUser_Email_Domain) - 1)];
 				$randomUser_Password = "Quiec123";
 				$randomUser_Bio = "Yeni+Hesap";
-				$randomUser_Proxy = $this->getProxy();
 				$randomUser_Save_Docs = "users.txt";
-
 				echo $randomUser_User_Name;
+
 $randomUser_id = "5886592160";
 echo "[!] $i Hesap oluşturuluyor!..\n";
-				$userCreate = $this->connectInstagram($randomUser_User_Name, $randomUser_Password, $randomUser_Email_Adress, $randomUser_Full_Name, $randomUser_Proxy);
+				$userCreate = $this->connectInstagram($randomUser_User_Name, $randomUser_Password, $randomUser_Email_Adress, $randomUser_Full_Name);
 								$userCreate = json_decode($userCreate);
 				if($userCreate->account_created == "true"){
 fwrite(fopen($randomUser_Save_Docs,"a+") ,"$randomUser_User_Name:$randomUser_Password \n");
