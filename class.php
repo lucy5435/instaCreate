@@ -4,8 +4,8 @@ class instaCreator {
 protected $trProxy = "88.255.182.170"; // TR olması zorunludur.
 protected $trProxy_Port = "8080";
 protected $trProxy_Tur = "HTTPS";
-	protected $csrf_token = '8T1YSTEUhZm0D13VLpqncYF0eaHxwfmf';
-	protected $mid_token = 'XMby6wABAAHpx_WQyBTy4tSCj7Bl';
+	protected $csrf_token = 'IdetTiYe6zzc13uzMJFy6qrYyRsUsjNp';
+	protected $mid_token = 'XLm-XgALAAGf0dFqO7BAbdd3NH_U';
 
 	private function connectInstagram($username, $password, $email, $full_name, $proxy){
 
