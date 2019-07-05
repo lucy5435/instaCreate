@@ -1,29 +1,25 @@
 <?php
-$homepage = file_get_contents('https://api.ipify.org/?format=text');
-echo $homepage;
 
+function lookup(){
+  $quotaguard_env = getenv("QUOTAGUARDSTATIC_URL");
+  $quotaguard = parse_url($quotaguard_env);
 
+  $proxyUrl       = $quotaguard['host'].":".$quotaguard['port'];
+  $proxyAuth       = $quotaguard['user'].":".$quotaguard['pass'];
 
-    $curl_connection = curl_init("https://api.ipify.org/?format=text");
-    curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-    curl_setopt($curl_connection, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
-    curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($curl_connection, CURLOPT_INTERFACE, "54.211.136.0");
-    curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, 0);
-    ob_start();
-    $response = curl_exec($curl_connection);
-    ob_end_clean();
-    $err = curl_error($curl_connection);
-    curl_close($curl_connection);
-    if ($err) {return "hata";} else {}
-    if (strpos($response, 'sorry') !== false OR strpos($response, 'Sorry') !== false){
-        return "hata";
-    }else{
-        echo " curl: ". $response;
-    }
+  $url = "http://ip.quotaguard.com/";
 
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $url);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_PROXY, $proxyUrl);
+  curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_BASIC);
+  curl_setopt($ch, CURLOPT_PROXYUSERPWD, $proxyAuth);
+  $response = curl_exec($ch);
+  return $response;
+}
 
-
+$res = lookup();
+print_r($res);
 
 ?>
