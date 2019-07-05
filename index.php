@@ -9,7 +9,7 @@ echo $homepage;
     curl_setopt($curl_connection, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
     curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($curl_connection, CURLOPT_INTERFACE, "107.23.139.202");
+    curl_setopt($curl_connection, CURLOPT_INTERFACE, "54.211.136.0");
     curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, 0);
     ob_start();
     $response = curl_exec($curl_connection);
