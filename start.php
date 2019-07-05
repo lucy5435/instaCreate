@@ -2,7 +2,7 @@
 require('class.php');
 
 
-$count = 3;
+$count = $_GET['count'];
 $sleep = 10;
 $i = new instaCreator();
 $i->userCreate($count,$sleep);
