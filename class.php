@@ -65,9 +65,9 @@ public function bio($username, $id){
 		$headers[] = "Accept-Language: tr-TR,en-US,en;q=0.8,id;q=0.6";
 
 		curl_setopt($channel1, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($channel1, CURLOPT_PROXYPORT, $this->trProxy_Port);
+/*curl_setopt($channel1, CURLOPT_PROXYPORT, $this->trProxy_Port);
 curl_setopt($channel1, CURLOPT_PROXYTYPE, $this->trProxy_Tur); // HTTP/HTTPS türü proxy kullanacağız.
-curl_setopt($channel1, CURLOPT_PROXY, $this->trProxy);
+curl_setopt($channel1, CURLOPT_PROXY, $this->trProxy);*/
 		$result = curl_exec($channel1);
 		curl_close($channel1);
 		}
@@ -128,6 +128,8 @@ curl_setopt($channel1, CURLOPT_PROXY, $this->trProxy);
 				$randomUser_Bio = "Yeni+Hesap";
 				$randomUser_Proxy = $this->getProxy();
 				$randomUser_Save_Docs = "users.txt";
+
+				echo $randomUser_User_Name;
 $randomUser_id = "5886592160";
 echo "[!] $i Hesap oluşturuluyor!..\n";
 				$userCreate = $this->connectInstagram($randomUser_User_Name, $randomUser_Password, $randomUser_Email_Adress, $randomUser_Full_Name, $randomUser_Proxy);
